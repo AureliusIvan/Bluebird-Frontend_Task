@@ -39,6 +39,8 @@ export default function Home() {
 
   return (
     <div
+
+      data-testid='home-page'
       className='p-[4rem] w-full h-full flex flex-col gap-4 '
     >
       <Header

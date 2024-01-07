@@ -14,6 +14,7 @@ export default function MyBookPage() {
 
     return (
         <div
+            data-testid='mybook-page'
             className=' w-full h-full flex flex-col gap-4 p-[4rem]'
         >
             <Header

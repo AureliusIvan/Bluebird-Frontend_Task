@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
     const path = usePathname();
-    
+
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     const [keyword, setKeyword] = useState("");
@@ -46,6 +46,8 @@ export default function Navbar() {
     return (
         <>
             <nav
+                // test id
+                data-testid='navbar'
                 className='w-full bg-primary sticky top-0 z-50'
             >
                 <nav className="py-2">
@@ -77,6 +79,7 @@ export default function Navbar() {
                                         <div className='flex flex-row items-center font-medium leading-5 transition duration-150  focus:outline-none
                                             bg-white bg-opacity-50 px-5 py-2 rounded-full hover:bg-opacity-30  ease-in-out'>
                                             <input
+                                                data-testid='search-input'
                                                 onChange={(e) => {
                                                     if (e.target.value === "") {
                                                         setSearchFocus(false)
@@ -184,7 +187,10 @@ export default function Navbar() {
                     </div>
                 </div> */}
             </nav>
+            {/* search result */}
             <div
+                id='search-result'
+                data-testid='search-result'
                 style={{
                     display: searchFocus ? 'block' : 'none'
                 }}
@@ -194,6 +200,7 @@ export default function Navbar() {
                     searchResult.map((item, index) => {
                         return (
                             <Link
+                                data-testid='search-result-item'
                                 onClick={() => setSearchFocus(false)}
                                 href={`/detail/${item.vehicle}`}
                                 key={index}

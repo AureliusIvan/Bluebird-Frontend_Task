@@ -132,7 +132,8 @@ Data yang ada pada halaman ini merupakan data yang telah di tambahkan oleh pengg
 
 # Test Result
 Berikut merupakan hasil dari test yang telah dilakukan pada aplikasi ini.
-
+<img src="./docs/assets/TestResultSS.png" alt="MarineGEO circle logo" style="height: auto; width:100%;"/>
+Saya menggunakan Jest dan React Testing Library untuk melakukan unit testing pada aplikasi ini. Kenapa tidak menggunakan Enzyme? Karena pada percobaan sebelumnya library Enzyme tidak dapat digunakan pada aplikasi yang dibuat dengan NextJS yang base-nya adalah ReactJS versi 18. Oleh karena itu saya menggunakan React Testing Library yang dapat digunakan pada ReactJS versi 18.
 
 # Contact
 Berikut merupakan kontak saya: 

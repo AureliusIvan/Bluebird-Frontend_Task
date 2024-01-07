@@ -27,9 +27,11 @@ export default function Wishlist() {
         // remove duplicate, if vehicle have same .vehicle, remove it
         const filteredData = newData.filter((item, index, self) => newData.indexOf(item) === index)
         setData(filteredData)
-    }, [queryLikedVehicles.data])   
+    }, [queryLikedVehicles.data])
     return (
         <div
+            data-testid='wishlist-page'
+            id='wishlist-page'
             role='wishlist page'
             className='w-full h-full flex flex-col gap-4 p-[4rem]'
         >

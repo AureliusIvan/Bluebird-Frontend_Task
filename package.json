@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles --forceExit --verbose",
     "coverage": "jest --coverage"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.7",
+    "@babel/preset-typescript": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@tanstack/eslint-plugin-query": "^5.17.1",
     "@testing-library/jest-dom": "^6.2.0",
@@ -33,6 +34,7 @@
     "@types/chai": "^4.3.11",
     "@types/enzyme": "^3.10.18",
     "@types/enzyme-adapter-react-16": "^1.0.9",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",

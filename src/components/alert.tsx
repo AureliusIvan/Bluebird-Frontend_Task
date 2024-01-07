@@ -23,7 +23,9 @@ const Alert = (props: AlertProps) => {
     }
 
     return (
-        <button onClick={showSwal}>
+        <button
+            id="alert-button"
+            onClick={showSwal}>
             {props.children}
         </button>
     )
