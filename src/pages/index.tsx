@@ -9,16 +9,24 @@ import { VehicleCategoryProps, VehicleProps } from '@/types/vehicles';
 import { useBlueBird } from '@/hooks/useBlueBird';
 import { LinkFormater } from '@/utils/linkFormat';
 import { Header } from '@/components/header';
+import { HeartIcon } from '@/components/icon';
 
 const placeholder = "https://via.placeholder.com/150"
 
 export default function Home() {
   const swiperRef = useRef();
-  const { queryVehicles, queryCategory } = useBlueBird();
+  const { queryVehicles, queryCategory, likeVehicleMutation, isLiked } = useBlueBird();
   const [currentCategory, setCurrentCategory] = React.useState(0); // 0 = all, 1 = taxi, 2 = car rental, 3 = shuttle, 4 = bus
-  const [currentData, setCurrentData] = React.useState<any>(queryVehicles.data);
+  const [currentData, setCurrentData] = React.useState<any>();
 
+  const handleInitData = async () => {
+    setCurrentCategory(0);
+    await queryVehicles.refetch().then((res) => {
+      setCurrentData(res.data);
+    })
+  }
   useEffect(() => {
+    handleInitData();
     if (currentCategory === 0) {
       setCurrentData(queryVehicles.data)
     } else {
@@ -110,11 +118,19 @@ export default function Home() {
                     alt="image"
                     className='absolute top-0 left-0 object-contain w-full h-full z-[0]'
                   />
-                  <div
+                  <button
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      likeVehicleMutation.mutate(vehicle.vehicle);
+                    }}
                     className='bg-primary text-white font-bold py-[0.1rem] px-[1rem] rounded-[1rem] w-fit right-[0.7rem] top-[0.7rem] absolute text-center  border-2 border-white'
                   >
-                    {vehicle.price}
-                  </div>
+                    <HeartIcon
+                      isLiked={vehicle.isLiked}
+                    />
+                    {/* {vehicle.price} */}
+                  </button>
                   <div
                     id='content'
                     className='z-[1] absolute bottom-0 bg-primary bg-opacity-50 w-full h-[3rem] flex items-center 

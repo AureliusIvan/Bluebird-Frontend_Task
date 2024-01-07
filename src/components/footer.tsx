@@ -74,13 +74,6 @@ export default function Footer() {
                                         <Link href="/" className="text-white text-xs opacity-50 underline">FAQ</Link>
                                     </div>
                                 </div>
-                                <div className='space-y-2'>
-                                    <p className="text-white text-sm">Format admisi</p>
-                                    <div className='space-y-1'>
-                                        <p className="text-white text-xs opacity-50">Email : admisi@umn.ac.id</p>
-                                        <p className="text-white text-xs opacity-50">Format : Nama, ALamat, No. Telepon, Jurusan yang diminati, dan keterangan</p>
-                                    </div>
-                                </div>
                             </div>
                             <div className='md:w-1/2 md:space-y-24 md:mb-0 flex flex-row md:flex-col justify-between md:justify-normal'>
                                 <div className='space-y-2'>

@@ -52,8 +52,9 @@ const useBlueBird = (slug = "") => {
         queryKey: ["vehicles", "liked"],
         queryFn: () => {
             const data = queryVehicles.data as VehicleProps[];
-            // return data.filter((item) => item.isBooked === true);
-            return data.filter((item) => item.isLiked === true);
+            // remove duplicate
+            const newData = data.filter((item, index, self) => data.indexOf(item) === index);
+            return newData.filter((item) => item.isLiked === true);
         },
         staleTime: Infinity,
         initialData: [],
@@ -63,9 +64,10 @@ const useBlueBird = (slug = "") => {
         queryKey: ["vehicles", "liked", slug],
         queryFn: () => {
             const data = queryLikedVehicles.data as VehicleProps[];
-            return data.find((item) => item.vehicle === slug)?.isLiked ?? false;
+            // remove duplicate
+            const newData = data.filter((item, index, self) => data.indexOf(item) === index);
+            return newData.find((item) => item.vehicle === slug)?.isLiked ?? false;
         },
-        // staleTime: Infinity,
         initialData: false,
     });
 
@@ -74,6 +76,8 @@ const useBlueBird = (slug = "") => {
             let data = queryVehicles.data as VehicleProps[];
             const prevData = queryLikedVehicles.data as VehicleProps[];
             let Liked = 0;
+
+
             data.map((item) => {
                 if (item.vehicle === slug) {
                     if (item.isLiked === true) {
@@ -87,13 +91,14 @@ const useBlueBird = (slug = "") => {
                 }
                 return item;
             })
+
             if (Liked === 1) {
                 data.push(...prevData);
             } else if (Liked === 2) {
-                // remove item from array
                 const newData = prevData.filter((item) => item.vehicle !== slug);
                 data = newData;
             }
+
             queryClient.setQueryData(["vehicles", "liked"], data);
         },
 

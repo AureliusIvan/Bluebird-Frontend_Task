@@ -3,6 +3,7 @@ import EmptyData from '@/components/emptyData'
 import { Header } from '@/components/header'
 import VehicleCard from '@/components/vehicleCard'
 import { useBlueBird } from '@/hooks/useBlueBird'
+import { VehicleProps } from '@/types/vehicles'
 import { useAmp } from 'next/amp'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,6 +21,13 @@ declare global {
 export default function Wishlist() {
     const { queryLikedVehicles } = useBlueBird()
     // const isAmp = useAmp()
+    const [data, setData] = React.useState<VehicleProps[]>([])
+    useEffect(() => {
+        const newData = queryLikedVehicles.data as VehicleProps[]
+        // remove duplicate, if vehicle have same .vehicle, remove it
+        const filteredData = newData.filter((item, index, self) => newData.indexOf(item) === index)
+        setData(filteredData)
+    }, [queryLikedVehicles.data])   
     return (
         <div
             role='wishlist page'
@@ -33,7 +41,7 @@ export default function Wishlist() {
                 className='flex flex-col gap-4 w-full h-full'
             >
                 {
-                    queryLikedVehicles.data?.map((vehicle: any, index: number) => {
+                    data?.map((vehicle: any, index: number) => {
                         return (
 
                             <VehicleCard
@@ -47,7 +55,7 @@ export default function Wishlist() {
                 }
 
                 {
-                    queryLikedVehicles.data.length === 0 &&
+                    data.length === 0 &&
                     <EmptyData />
                 }
             </div>
